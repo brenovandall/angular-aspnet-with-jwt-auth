@@ -1,0 +1,93 @@
+<section class="text-gray-600 body-font">
+    <div class="container px-5 py-14 mx-auto flex flex-wrap items-center">
+      <div class="bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0">
+        <h2 class="text-gray-900 text-lg font-medium title-font mb-5">Adicionar Postagem</h2>
+
+        <form #form="ngForm" (ngSubmit)="saveData()">
+          <div class="relative mb-4">
+            <label class="leading-7 text-sm text-gray-600">Titulo</label>
+            <input type="text" placeholder="Digite aqui" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            [(ngModel)]="model.titulo"
+            [ngModelOptions]="{standalone: true}">
+        </div>
+
+          <div class="relative mb-4">
+            <label class="leading-7 text-sm text-gray-600">Descrição</label>
+            <input type="text" placeholder="Digite aqui" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            [(ngModel)]="model.descricao"
+            [ngModelOptions]="{standalone: true}">
+          </div>
+
+          <div class="relative mb-4">
+            <label class="leading-7 text-sm text-gray-600">Conteúdo</label>
+              <textarea type="text" placeholder="Digite aqui" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+              id="conteudo"
+              name="conteudo"
+              style="height: 350px; max-height: 350px;"
+              [(ngModel)]="model.conteudo"
+              [ngModelOptions]="{standalone: true}"></textarea>
+          </div>
+
+          <div class="relative mb-4">
+            <label class="leading-7 text-sm text-gray-600">Url Da Imagem</label>
+            @if(model.urlImagem !== "") {
+              <ng-container>
+                <div>
+                  <img [src]="model.urlImagem" style="height: 100px" class="mb-2" />
+                </div>
+              </ng-container>
+            }
+            <input type="text" placeholder="Digite aqui" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            [(ngModel)]="model.urlImagem"
+            [ngModelOptions]="{standalone: true}">
+          </div>
+
+          <div class="relative mb-4">
+            <label class="leading-7 text-sm text-gray-600">Url Da Postagem</label>
+            <input type="text" placeholder="Digite aqui" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            [(ngModel)]="model.urlPostagem"
+            [ngModelOptions]="{standalone: true}">
+          </div>
+
+          <div class="relative mb-4">
+            <label class="leading-7 text-sm text-gray-600">Data</label>
+            <input type="date" placeholder="Digite aqui" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            value="{{model.dataAdicionada}}"
+            [(ngModel)]="model.dataAdicionada"
+            (ngModelChange)="model.dataAdicionada = $event"
+            name="dataAdicionada"
+            [ngModelOptions]="{standalone: true}">
+          </div>
+
+          <div class="relative mb-4">
+            <label class="leading-7 text-sm text-gray-600">Autor</label>
+            <input type="text" placeholder="Digite aqui" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
+            [(ngModel)]="model.autor"
+            [ngModelOptions]="{standalone: true}">
+          </div>
+
+          <div class="relative mb-4">
+            <label class="leading-7 text-sm text-gray-600">Categorias</label>
+            <ng-container *ngIf="categorias$ | async as categorias"> 
+              <select class="w-full" 
+              [(ngModel)]="model.categorias" 
+              [ngModelOptions]="{standalone: true}" multiple>
+                <option *ngFor="let item of categorias" [value]="item.id">
+                  {{item.nome}}
+                </option>
+              </select>
+            </ng-container>
+          </div>
+
+          <div class="relative mb-4 flex gap-2">
+            <input type="checkbox"[(ngModel)]="model.status" name="status"
+            [ngModelOptions]="{standalone: true}" >
+            <label class="leading-7 text-sm text-gray-600" >Status (Ativo ou Inativo)</label>
+          </div>
+
+        <button class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Adicionar Postagem</button>
+        </form>
+        
+      </div>
+    </div>
+  </section>
